@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ahmed Nawar | Backend Engineer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              dark: "#050505",
+              surface: "#0f0f0f",
+              primary: "#38bdf8",
+              secondary: "#818cf8",
+              whatsapp: "#25D366",
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background-color: #050505;
+        color: #ffffff;
+        cursor: none;
+        overflow-x: hidden;
+      }
+
+      /* Custom Cursor */
+      .cursor-dot {
+        width: 8px;
+        height: 8px;
+        background-color: #38bdf8;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+      }
+      .cursor-outline {
+        width: 40px;
+        height: 40px;
+        border: 2px solid rgba(56, 189, 248, 0.4);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+        transition:
+          width 0.3s,
+          height 0.3s;
+      }
+
+      /* Floating Animation */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-12px);
+        }
+      }
+      .floating {
+        animation: float 4s ease-in-out infinite;
+      }
+      .delay-1 {
+        animation-delay: 0s;
+      }
+      .delay-2 {
+        animation-delay: 1s;
+      }
+      .delay-3 {
+        animation-delay: 2s;
+      }
+
+      /* Glassmorphism */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(12px);
+        border-radius: 24px;
+        transition: all 0.4s ease;
+      }
+      .glass-card:hover {
+        border-color: rgba(56, 189, 248, 0.4);
+        background: rgba(56, 189, 248, 0.03);
+        transform: translateY(-8px);
+      }
+
+      /* Hide Scrollbar */
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #050505;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 10px;
+      }
+
+      /* --- Mobile Navbar Custom Styles --- */
+      .mobile-nav {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 400px;
+        background: rgba(15, 23, 42, 0.8);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 25px;
+        padding: 10px 20px;
+        z-index: 1000;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #94a3b8;
+        text-decoration: none;
+        font-size: 0.65rem;
+        transition: 0.3s;
+      }
+      .nav-item i {
+        font-size: 1.2rem;
+        margin-bottom: 2px;
+      }
+      .nav-item.active {
+        color: #38bdf8;
+      }
+      .nav-hidden {
+        transform: translate(-50%, 120px);
+      }
+      /* ---------------------------------- */
+    </style>
+  </head>
+  <body class="antialiased">
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <nav class="mobile-nav md:hidden">
+      <div class="nav-container">
+        <a href="#" class="nav-item active">
+          <i class="bi bi-house-door"></i>
+          <span>Home</span>
+        </a>
+        <a href="#about" class="nav-item">
+          <i class="bi bi-person"></i>
+          <span>About</span>
+        </a>
+        <a href="#skills" class="nav-item">
+          <i class="bi bi-cpu"></i>
+          <span>Skills</span>
+        </a>
+        <a href="#projects" class="nav-item">
+          <i class="bi bi-briefcase"></i>
+          <span>Work</span>
+        </a>
+      </div>
+    </nav>
+
+    <nav
+      class="fixed w-full z-50 top-0 py-4 px-6 md:px-12 backdrop-blur-xl bg-dark/60 border-b border-white/5"
+    >
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <a href="#" class="text-xl md:text-2xl font-extrabold tracking-tighter"
+          >NAWAR<span class="text-primary">.</span></a
+        >
+        <div class="hidden md:flex gap-8 text-sm font-medium text-gray-400">
+          <a href="#about" class="hover:text-primary transition">About</a>
+          <a href="#skills" class="hover:text-primary transition">Skills</a>
+          <a href="#projects" class="hover:text-primary transition">Projects</a>
+        </div>
+        <div class="flex items-center gap-4">
+          <a
+            href="https://wa.me/201551030114"
+            target="_blank"
+            class="text-whatsapp text-2xl hover:scale-110 transition"
+            ><i class="fab fa-whatsapp"></i
+          ></a>
+          <a
+            href="mailto:nawarahmed652@gmail.com"
+            class="px-5 py-2 rounded-full bg-primary text-dark font-bold text-sm hover:brightness-110 transition"
+            >Hire Me</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <section
+      class="min-h-screen flex flex-col justify-center items-center relative px-6 pt-24 pb-12"
+    >
+      <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent -z-10"
+      ></div>
+
+      <div class="text-center max-w-5xl mx-auto gs-reveal">
+        <div class="relative w-48 h-48 md:w-64 md:h-64 mx-auto mb-10">
+          <div
+            class="absolute inset-0 bg-primary/20 rounded-full blur-[40px] animate-pulse"
+          ></div>
+          <div
+            class="relative w-full h-full rounded-full p-1.5 bg-gradient-to-tr from-primary via-secondary to-primary overflow-hidden"
+          >
+            <img
+              src="abonawar_img.png"
+              alt="Ahmed Nawar"
+              class="w-full h-full object-cover rounded-full border-4 border-dark"
+            />
+          </div>
+        </div>
+
+        <span
+          class="inline-block px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs md:text-sm font-medium text-primary mb-6"
+          >📍 Available for Backend Roles</span
+        >
+        <h1
+          class="text-5xl md:text-8xl font-extrabold tracking-tighter mb-6 leading-tight"
+        >
+          Ahmed Nawar
+        </h1>
+        <div
+          class="text-xl md:text-3xl font-semibold text-gray-400 mb-8 min-h-[40px]"
+        >
+          I build <span id="typed-text" class="text-white"></span>
+        </div>
+        <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-10">
+          Computer Science graduate (GPA: 3.47) specializing in high-performance
+          backend systems. I transform complex requirements into clean, scalable
+          architecture.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 px-4">
+          <a
+            href="#projects"
+            class="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-dark font-bold hover:bg-primary hover:text-white transition duration-300 text-center"
+            >View My Work</a
+          >
+
+          <a
+            href="https://github.com/AhmedNawar2003"
+            target="_blank"
+            class="w-full sm:w-auto px-8 py-4 rounded-full bg-white/5 text-white font-bold border border-white/10 hover:bg-white/10 transition flex items-center justify-center gap-2"
+          >
+            <i class="fab fa-github"></i> GitHub
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/ahmed-nawar-246513243?"
+            target="_blank"
+            class="w-full sm:w-auto px-8 py-4 rounded-full bg-[#0077b5]/10 text-[#0077b5] font-bold border border-[#0077b5]/20 hover:bg-[#0077b5] hover:text-white transition flex items-center justify-center gap-2"
+          >
+            <i class="fab fa-linkedin-in"></i> LinkedIn
+          </a>
+
+          <a
+            href="./Ahmed Nawar-Cv-2026.pdf"
+            download
+            class="w-full sm:w-auto px-8 py-4 rounded-full bg-primary/10 text-primary font-bold border border-primary/20 hover:bg-primary hover:text-white transition flex items-center justify-center gap-2"
+          >
+            <i class="fas fa-file-download"></i> Download CV
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="py-12 md:py-24 px-4 sm:px-6 max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div
+          class="bento-box p-6 md:p-10 lg:col-span-2 gs-reveal flex flex-col justify-center items-start border border-white/5 bg-white/5 rounded-[2rem] backdrop-blur-md"
+        >
+          <div
+            class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6"
+          >
+            <i class="fas fa-graduation-cap text-2xl text-primary"></i>
+          </div>
+          <h3 class="text-2xl md:text-3xl font-bold mb-3 tracking-tight">
+            Menofia University
+          </h3>
+          <p class="text-gray-400 text-lg mb-6 leading-relaxed">
+            Bachelor's Degree in Computer Science & Information Technology
+          </p>
+          <div
+            class="flex items-center gap-3 bg-primary/10 text-primary px-5 py-2 rounded-full border border-primary/20 shadow-lg shadow-primary/5"
+          >
+            <span class="relative flex h-3 w-3">
+              <span
+                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"
+              ></span>
+              <span
+                class="relative inline-flex rounded-full h-3 w-3 bg-primary"
+              ></span>
+            </span>
+            <span class="font-bold text-sm md:text-base"
+              >GPA: 3.47 (Very Good)</span
+            >
+          </div>
+        </div>
+
+        <div
+          class="bento-box p-6 md:p-10 gs-reveal flex flex-col justify-center border border-white/5 bg-white/5 rounded-[2rem] backdrop-blur-md"
+        >
+          <h3
+            class="text-xl md:text-2xl font-bold mb-6 flex items-center gap-3"
+          >
+            <span class="w-1.5 h-6 bg-primary rounded-full"></span>
+            Contact Info
+          </h3>
+
+          <div class="space-y-4">
+            <a
+              href="mailto:nawarahmed652@gmail.com"
+              class="group flex items-center p-3 rounded-2xl hover:bg-white/5 transition-all duration-300 border border-transparent hover:border-white/10"
+            >
+              <div
+                class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:text-primary transition-colors"
+              >
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="ml-4 overflow-hidden">
+                <p class="text-xs text-gray-500 uppercase tracking-widest">
+                  Email
+                </p>
+                <p
+                  class="text-sm md:text-base text-gray-300 truncate font-medium"
+                >
+                  nawarahmed652@gmail.com
+                </p>
+              </div>
+            </a>
+
+            <a
+              href="https://wa.me/201551030114"
+              target="_blank"
+              class="group flex items-center p-3 rounded-2xl hover:bg-white/5 transition-all duration-300 border border-transparent hover:border-white/10"
+            >
+              <div
+                class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:text-whatsapp transition-colors"
+              >
+                <i class="fab fa-whatsapp"></i>
+              </div>
+              <div class="ml-4">
+                <p class="text-xs text-gray-500 uppercase tracking-widest">
+                  WhatsApp
+                </p>
+                <p class="text-sm md:text-base text-gray-300 font-medium">
+                  +20 155 103 0114
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="py-24 px-6 max-w-7xl mx-auto">
+      <h2 class="text-3xl md:text-5xl font-bold mb-16 text-center gs-reveal">
+        Technical <span class="text-primary">Skills</span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="glass-card p-8 gs-reveal">
+          <h3
+            class="text-xl font-bold mb-8 flex items-center gap-3 text-primary"
+          >
+            <i class="fas fa-server"></i> Backend Engineering
+          </h3>
+          <div class="grid grid-cols-3 gap-y-8">
+            <div class="flex flex-col items-center gap-2 floating delay-1">
+              <i class="fab fa-java text-4xl text-orange-500"></i>
+              <span class="text-[10px] text-gray-400 uppercase">Java</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 floating delay-2">
+              <i class="fas fa-leaf text-4xl text-green-500"></i>
+              <span class="text-[10px] text-gray-400 uppercase"
+                >Spring Boot</span
+              >
+            </div>
+            <div class="flex flex-col items-center gap-2 floating delay-3">
+              <i class="fas fa-project-diagram text-4xl text-purple-400"></i>
+              <span class="text-[10px] text-gray-400 uppercase">Kafka</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 floating delay-2">
+              <i class="fas fa-hashtag text-4xl text-indigo-500"></i>
+              <span class="text-[10px] text-gray-400 uppercase">C# / .NET</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 floating delay-1">
+              <i class="fab fa-python text-4xl text-yellow-400"></i>
+              <span class="text-[10px] text-gray-400 uppercase">Python</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 floating delay-3">
+              <i class="fas fa-cloud text-4xl text-blue-400"></i>
+              <span class="text-[10px] text-gray-400 uppercase"
+                >Microservices</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card p-8 gs-reveal">
+          <h3
+            class="text-xl font-bold mb-8 flex items-center gap-3 text-secondary"
+          >
+            <i class="fas fa-laptop-code"></i> Frontend Tech
+          </h3>
+          <div class="grid grid-cols-3 gap-y-8">
+            <div class="flex flex-col items-center gap-2 floating delay-2">
+              <i class="fab fa-react text-4xl text-cyan-400"></i>
+              <span class="text-[10px] text-gray-400 uppercase">React</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 floating delay-1">
+              <i class="fab fa-js text-4xl text-yellow-400"></i>
+              <span class="text-[10px] text-gray-400 uppercase"
+                >JavaScript</span
+              >
+            </div>
+            <div class="flex flex-col items-center gap-2 floating delay-3">
+              <i class="fas fa-bolt text-4xl text-blue-500"></i>
+              <span class="text-[10px] text-gray-400 uppercase"
+                >TypeScript</span
+              >
+            </div>
+            <div class="flex flex-col items-center gap-2 floating delay-1">
+              <i class="fab fa-html5 text-4xl text-orange-600"></i>
+              <span class="text-[10px] text-gray-400 uppercase">HTML5</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 floating delay-2">
+              <i class="fab fa-css3-alt text-4xl text-blue-600"></i>
+              <span class="text-[10px] text-gray-400 uppercase">CSS3</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 floating delay-3">
+              <i class="fab fa-sass text-4xl text-pink-400"></i>
+              <span class="text-[10px] text-gray-400 uppercase"
+                >SASS/Tailwind</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card p-8 gs-reveal">
+          <h3 class="text-xl font-bold mb-8 flex items-center gap-3 text-white">
+            <i class="fas fa-database"></i> Database & DevOps
+          </h3>
+          <div class="grid grid-cols-3 gap-y-8">
+            <div class="flex flex-col items-center gap-2 floating delay-3">
+              <i class="fas fa-database text-4xl text-indigo-400"></i>
+              <span class="text-[10px] text-gray-400 uppercase"
+                >PostgreSQL</span
+              >
+            </div>
+            <div class="flex flex-col items-center gap-2 floating delay-1">
+              <i class="fas fa-table text-4xl text-blue-500"></i>
+              <span class="text-[10px] text-gray-400 uppercase">MySQL</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 floating delay-2">
+              <i class="fas fa-server text-4xl text-red-500"></i>
+              <span class="text-[10px] text-gray-400 uppercase"
+                >SQL Server</span
+              >
+            </div>
+            <div class="flex flex-col items-center gap-2 floating delay-1">
+              <i class="fab fa-docker text-4xl text-blue-400"></i>
+              <span class="text-[10px] text-gray-400 uppercase">Docker</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 floating delay-2">
+              <i class="fab fa-github text-4xl text-white"></i>
+              <span class="text-[10px] text-gray-400 uppercase">GitHub</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 floating delay-3">
+              <i class="fab fa-git-alt text-4xl text-orange-500"></i>
+              <span class="text-[10px] text-gray-400 uppercase">Git</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card p-8 md:col-span-2 lg:col-span-3 gs-reveal">
+          <h3
+            class="text-xl font-bold mb-6 flex items-center gap-3 text-gray-300"
+          >
+            <i class="fas fa-chart-pie"></i> Data Analysis & Visualization
+          </h3>
+          <div class="flex flex-wrap gap-4">
+            <div
+              class="px-6 py-3 rounded-xl bg-white/5 border border-white/10 flex items-center gap-3 hover:border-primary transition"
+            >
+              <i class="fas fa-chart-bar text-yellow-500"></i>
+              <span class="text-sm font-semibold">Power BI</span>
+            </div>
+            <div
+              class="px-6 py-3 rounded-xl bg-white/5 border border-white/10 flex items-center gap-3 hover:border-primary transition"
+            >
+              <i class="fas fa-th-large text-blue-500"></i>
+              <span class="text-sm font-semibold">Tableau</span>
+            </div>
+            <div
+              class="px-6 py-3 rounded-xl bg-white/5 border border-white/10 flex items-center gap-3 hover:border-primary transition"
+            >
+              <i class="fab fa-python text-green-500"></i>
+              <span class="text-sm font-semibold"
+                >Data Visualization (Python/SQL)</span
+              >
+            </div>
+            <div
+              class="px-6 py-3 rounded-xl bg-white/5 border border-white/10 flex items-center gap-3 hover:border-primary transition"
+            >
+              <i class="fas fa-brain text-purple-500"></i>
+              <span class="text-sm font-semibold"
+                >SOLID & Clean Architecture</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="py-24 px-6 max-w-7xl mx-auto">
+      <h2 class="text-3xl md:text-5xl font-bold mb-16 gs-reveal">
+        Featured <span class="text-primary">Projects</span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="glass-card p-6 flex flex-col gs-reveal">
+          <div
+            class="h-40 flex items-center justify-center bg-white/5 rounded-xl mb-6"
+          >
+            <i
+              class="fas fa-network-wired text-5xl text-primary opacity-30"
+            ></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Microservices Backend</h3>
+          <p class="text-gray-500 text-sm mb-4">
+            Spring Cloud system with API Gateway, Eureka, and JWT.
+          </p>
+          <a
+            href="https://github.com/AhmedNawar2003/Microservices"
+            target="_blank"
+            class="mt-auto text-primary text-sm font-bold flex items-center gap-2 hover:underline"
+            >View on GitHub <i class="fas fa-arrow-right"></i
+          ></a>
+        </div>
+
+        <div class="glass-card p-6 flex flex-col gs-reveal">
+          <div
+            class="h-40 flex items-center justify-center bg-white/5 rounded-xl mb-6"
+          >
+            <i class="fas fa-database text-5xl text-secondary opacity-30"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">RESTful CRUD API</h3>
+          <p class="text-gray-500 text-sm mb-4">
+            Developed using Spring Boot, JPA, Hibernate, and DTO mapping.
+          </p>
+          <a
+            href="https://github.com/AhmedNawar2003/REST_API_SPRING_BOOT"
+            target="_blank"
+            class="mt-auto text-secondary text-sm font-bold flex items-center gap-2 hover:underline"
+            >View on GitHub <i class="fas fa-arrow-right"></i
+          ></a>
+        </div>
+
+        <div class="glass-card p-6 flex flex-col gs-reveal">
+          <div
+            class="h-40 flex items-center justify-center bg-white/5 rounded-xl mb-6"
+          >
+            <i class="fas fa-layer-group text-5xl text-white opacity-30"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Advanced Architecture API</h3>
+          <p class="text-gray-500 text-sm mb-4">
+            Clean Architecture principles with layered REST API design.
+          </p>
+          <a
+            href="https://github.com/AhmedNawar2003/Spring-Boot-REST-API"
+            target="_blank"
+            class="mt-auto text-white text-sm font-bold flex items-center gap-2 hover:underline"
+            >View on GitHub <i class="fas fa-arrow-right"></i
+          ></a>
+        </div>
+
+        <div class="glass-card p-6 flex flex-col gs-reveal">
+          <div
+            class="h-40 flex items-center justify-center bg-white/5 rounded-xl mb-6"
+          >
+            <i class="fas fa-desktop text-5xl text-blue-400 opacity-30"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">UI Integrated Application</h3>
+          <p class="text-gray-500 text-sm mb-4">
+            Fullstack CRUD application with Spring Boot and Frontend.
+          </p>
+          <a
+            href="https://github.com/AhmedNawar2003/Spring-Boot-CRUD-With-UI"
+            target="_blank"
+            class="mt-auto text-blue-400 text-sm font-bold flex items-center gap-2 hover:underline"
+            >View on GitHub <i class="fas fa-arrow-right"></i
+          ></a>
+        </div>
+
+        <div class="glass-card p-6 flex flex-col gs-reveal">
+          <div
+            class="h-40 flex items-center justify-center bg-white/5 rounded-xl mb-6"
+          >
+            <i
+              class="fas fa-shield-halved text-5xl text-yellow-500 opacity-40"
+            ></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Spring Security</h3>
+          <p class="text-gray-500 text-sm mb-4">
+            Spring Security JWT Authentication System
+          </p>
+          <a
+            href="https://github.com/AhmedNawar2003/Spring-Boot-Spring-Security"
+            target="_blank"
+            class="mt-auto text-red-400 text-sm font-bold flex items-center gap-2 hover:underline"
+            >View on GitHub <i class="fas fa-arrow-right"></i
+          ></a>
+        </div>
+        <div class="glass-card p-6 flex flex-col gs-reveal">
+          <div
+            class="h-40 flex items-center justify-center bg-white/5 rounded-xl mb-6"
+          >
+            <i class="fab fa-docker text-5xl text-blue-500 opacity-30"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Dockerized Backend</h3>
+          <p class="text-gray-500 text-sm mb-4">
+            Containerization with Docker Compose and PostgreSQL.
+          </p>
+          <a
+            href="https://github.com/AhmedNawar2003/Docker_applying"
+            target="_blank"
+            class="mt-auto text-blue-500 text-sm font-bold flex items-center gap-2 hover:underline"
+            >View on GitHub <i class="fas fa-arrow-right"></i
+          ></a>
+        </div>
+
+        <div class="glass-card p-6 flex flex-col gs-reveal">
+          <div
+            class="h-40 flex items-center justify-center bg-white/5 rounded-xl mb-6"
+          >
+            <i class="fas fa-stream text-5xl text-purple-400 opacity-30"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Event-Driven Kafka</h3>
+          <p class="text-gray-500 text-sm mb-4">
+            Producers/Consumers communication with Spring Boot.
+          </p>
+          <a
+            href="https://github.com/AhmedNawar2003/Kafka-with-spring-boot"
+            target="_blank"
+            class="mt-auto text-purple-400 text-sm font-bold flex items-center gap-2 hover:underline"
+            >View on GitHub <i class="fas fa-arrow-right"></i
+          ></a>
+        </div>
+
+        <div class="glass-card p-6 flex flex-col gs-reveal">
+          <div
+            class="h-40 flex items-center justify-center bg-white/5 rounded-xl mb-6"
+          >
+            <i class="fas fa-rocket text-5xl text-green-400 opacity-30"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">CI/CD Spring Pipeline</h3>
+          <p class="text-gray-500 text-sm mb-4">
+            Automated testing & deployment using GitHub Actions.
+          </p>
+          <a
+            href="https://github.com/AhmedNawar2003/GithubActionsRepo"
+            target="_blank"
+            class="mt-auto text-green-400 text-sm font-bold flex items-center gap-2 hover:underline"
+            >View on GitHub <i class="fas fa-arrow-right"></i
+          ></a>
+        </div>
+
+        <div class="glass-card p-6 flex flex-col gs-reveal">
+          <div
+            class="h-40 flex items-center justify-center bg-white/5 rounded-xl mb-6"
+          >
+            <i class="fas fa-vial text-5xl text-yellow-400 opacity-30"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Advanced GitHub Workflow</h3>
+          <p class="text-gray-500 text-sm mb-4">
+            Custom multi-stage workflows with environment triggers.
+          </p>
+          <a
+            href="https://github.com/AhmedNawar2003/CI_CD-Workflow"
+            target="_blank"
+            class="mt-auto text-yellow-400 text-sm font-bold flex items-center gap-2 hover:underline"
+            >View on GitHub <i class="fas fa-arrow-right"></i
+          ></a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="py-20 border-t border-white/5 text-center px-6">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-2xl font-bold mb-8">
+          Ahmed Nawar<span class="text-primary">.</span>
+        </h2>
+        <div class="flex justify-center gap-8 mb-12">
+          <a
+            href="https://www.linkedin.com/in/ahmed-nawar-246513243?"
+            target="_blank"
+            class="text-gray-500 hover:text-primary transition text-2xl"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+          <a
+            href="https://github.com/AhmedNawar2003"
+            target="_blank"
+            class="text-gray-500 hover:text-white transition text-2xl"
+            ><i class="fab fa-github"></i
+          ></a>
+          <a
+            href="https://wa.me/201551030114"
+            target="_blank"
+            class="text-gray-500 hover:text-whatsapp transition text-2xl"
+            ><i class="fab fa-whatsapp"></i
+          ></a>
+        </div>
+        <p class="text-gray-600 text-sm">
+          © 2026 Ahmed Nawar. Built for performance.
+        </p>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script>
+      // 1. Cursor
+      const cursorDot = document.getElementById("cursor-dot");
+      const cursorOutline = document.getElementById("cursor-outline");
+      window.addEventListener("mousemove", (e) => {
+        cursorDot.style.left = `${e.clientX}px`;
+        cursorDot.style.top = `${e.clientY}px`;
+        cursorOutline.animate(
+          { left: `${e.clientX}px`, top: `${e.clientY}px` },
+          { duration: 400, fill: "forwards" },
+        );
+      });
+
+      // 2. Typing
+      new Typed("#typed-text", {
+        strings: [
+          "Microservices.",
+          "Scalable APIs.",
+          "Event-Driven Systems.",
+          "Modern Frontend.",
+          "Cloud Architectures.",
+        ],
+        typeSpeed: 60,
+        backSpeed: 40,
+        loop: true,
+      });
+
+      // 3. GSAP Logic for general reveal
+      gsap.registerPlugin(ScrollTrigger);
+      document.querySelectorAll(".gs-reveal").forEach((elem) => {
+        // نمنع التكرار مع كود المشاريع المخصص
+        if (!elem.closest("#projects")) {
+          gsap.fromTo(
+            elem,
+            { opacity: 0, y: 50 },
+            {
+              duration: 1,
+              opacity: 1,
+              y: 0,
+              ease: "power3.out",
+              scrollTrigger: { trigger: elem, start: "top 90%" },
+            },
+          );
+        }
+      });
+
+      // 4. Advanced High-Speed Sequential Projects Animation
+      gsap.from("#projects .glass-card", {
+        scrollTrigger: {
+          trigger: "#projects",
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+        opacity: 0,
+        scale: 0.9,
+        y: 20,
+        duration: 0.3,
+        stagger: 0.05, // تتابع خاطف وسريع جداً
+        ease: "power2.out",
+        clearProps: "all",
+      });
+
+      // 5. Skill Icons Animation
+      gsap.from("#skills .floating", {
+        scrollTrigger: {
+          trigger: "#skills",
+          start: "top 85%",
+        },
+        y: 20,
+        opacity: 0,
+        duration: 0.4,
+        stagger: 0.05,
+        ease: "power2.out",
+      });
+
+      // 6. About Cards Animation
+      gsap.from("#about .bento-box, #about .glass-card", {
+        scrollTrigger: { trigger: "#about", start: "top 85%" },
+        x: (i) => (i === 0 ? -50 : 50),
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+
+      // 7. Mobile Nav Smart Logic
+      let lastScroll = 0;
+      const mobileNav = document.querySelector(".mobile-nav");
+
+      window.addEventListener("scroll", () => {
+        const currentScroll = window.pageYOffset;
+        if (currentScroll <= 0) {
+          mobileNav.classList.remove("nav-hidden");
+          return;
+        }
+        if (
+          currentScroll > lastScroll &&
+          !mobileNav.classList.contains("nav-hidden")
+        ) {
+          mobileNav.classList.add("nav-hidden");
+        } else if (
+          currentScroll < lastScroll &&
+          mobileNav.classList.contains("nav-hidden")
+        ) {
+          mobileNav.classList.remove("nav-hidden");
+        }
+        lastScroll = currentScroll;
+      });
+
+      document.querySelectorAll(".nav-item").forEach((item) => {
+        item.addEventListener("click", function () {
+          document
+            .querySelectorAll(".nav-item")
+            .forEach((i) => i.classList.remove("active"));
+          this.classList.add("active");
+        });
+      });
+
+      // 8. Tilt Effect
+      VanillaTilt.init(document.querySelectorAll(".glass-card"), {
+        max: 10,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.1,
+      });
+    </script>
+  </body>
+</html>
