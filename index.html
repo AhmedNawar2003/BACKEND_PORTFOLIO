@@ -398,7 +398,7 @@
               <i class="fab fa-java text-4xl text-orange-500"></i>
               <span
                 class="text-[10px] text-gray-400 uppercase font-bold text-center"
-                >Java</span
+                >Java 21</span
               >
             </div>
             <div class="flex flex-col items-center gap-2 floating delay-2">
@@ -433,7 +433,7 @@
               <i class="fas fa-project-diagram text-4xl text-purple-400"></i>
               <span
                 class="text-[10px] text-gray-400 uppercase font-bold text-center"
-                >Kafka</span
+                >Kafka (EDA)</span
               >
             </div>
           </div>
@@ -457,6 +457,18 @@
             <span
               class="text-[9px] bg-white/5 px-2 py-1 rounded border border-white/10 text-gray-300 font-medium"
               >JUnit 5/Mockito</span
+            >
+            <span
+              class="text-[9px] bg-white/5 px-2 py-1 rounded border border-white/10 text-gray-300 font-medium"
+              >Saga Choreography</span
+            >
+            <span
+              class="text-[9px] bg-white/5 px-2 py-1 rounded border border-white/10 text-gray-300 font-medium"
+              >WebSockets/STOMP</span
+            >
+            <span
+              class="text-[9px] bg-white/5 px-2 py-1 rounded border border-white/10 text-gray-300 font-medium"
+              >SpringDoc OpenAPI</span
             >
           </div>
         </div>
@@ -514,11 +526,15 @@
           <div class="mt-8 flex flex-wrap gap-2 border-t border-white/5 pt-4">
             <span
               class="text-[9px] bg-white/5 px-2 py-1 rounded border border-white/10 text-gray-300 font-medium"
-              >Redux</span
+              >Redux Toolkit</span
             >
             <span
               class="text-[9px] bg-white/5 px-2 py-1 rounded border border-white/10 text-gray-300 font-medium"
               >Axios</span
+            >
+            <span
+              class="text-[9px] bg-white/5 px-2 py-1 rounded border border-white/10 text-gray-300 font-medium"
+              >Framer Motion</span
             >
           </div>
         </div>
@@ -537,7 +553,7 @@
             <div class="flex flex-col items-center gap-2 floating delay-1">
               <i class="fab fa-docker text-4xl text-blue-400"></i>
               <span class="text-[10px] text-gray-400 uppercase font-bold"
-                >Docker</span
+                >Docker Compose</span
               >
             </div>
             <div class="flex flex-col items-center gap-2 floating delay-2">
@@ -547,21 +563,21 @@
               >
             </div>
             <div class="flex flex-col items-center gap-2 floating delay-1">
-              <i class="fas fa-eye text-4xl text-red-400"></i>
+              <i class="fas fa-search text-4xl text-green-400"></i>
               <span class="text-[10px] text-gray-400 uppercase font-bold"
-                >Observability</span
+                >Elasticsearch</span
               >
             </div>
             <div class="flex flex-col items-center gap-2 floating delay-2">
-              <i class="fas fa-vial text-4xl text-yellow-400"></i>
+              <i class="fas fa-hdd text-4xl text-red-400"></i>
               <span class="text-[10px] text-gray-400 uppercase font-bold"
-                >JUnit 5</span
+                >MinIO Storage</span
               >
             </div>
             <div class="flex flex-col items-center gap-2 floating delay-3">
-              <i class="fas fa-tools text-4xl text-gray-300"></i>
+              <i class="fas fa-bolt text-4xl text-yellow-400"></i>
               <span class="text-[10px] text-gray-400 uppercase font-bold"
-                >Maven</span
+                >Redis</span
               >
             </div>
           </div>
@@ -572,11 +588,11 @@
             >
             <span
               class="text-[9px] bg-white/5 px-2 py-1 rounded border border-white/10 text-gray-300 font-medium"
-              >Zipkin</span
+              >Zipkin Tracing</span
             >
             <span
               class="text-[9px] bg-white/5 px-2 py-1 rounded border border-white/10 text-gray-300 font-medium"
-              >Redis</span
+              >Micrometer/Actuator</span
             >
           </div>
         </div>
@@ -585,26 +601,17 @@
           <h3
             class="text-xl font-bold mb-8 flex items-center gap-3 text-secondary"
           >
-            <i class="fas fa-brain"></i> Fundamentals
+            <i class="fas fa-brain"></i> Fundamentals & Patterns
           </h3>
           <ul class="space-y-4">
             <li class="flex items-start gap-3">
               <i class="fas fa-check-circle text-secondary mt-1 text-xs"></i>
               <div>
                 <p class="text-xs font-bold text-gray-200">
-                  OOP & Design Patterns
+                  Distributed Saga Pattern
                 </p>
                 <p class="text-[10px] text-gray-500">
-                  SOLID, Creational & Structural Patterns
-                </p>
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <i class="fas fa-check-circle text-secondary mt-1 text-xs"></i>
-              <div>
-                <p class="text-xs font-bold text-gray-200">Algorithms & DS</p>
-                <p class="text-[10px] text-gray-500">
-                  Optimization & Space/Time Complexity
+                  Choreography-based transactions across microservices
                 </p>
               </div>
             </li>
@@ -612,19 +619,32 @@
               <i class="fas fa-check-circle text-secondary mt-1 text-xs"></i>
               <div>
                 <p class="text-xs font-bold text-gray-200">
-                  Clean Architecture
+                  Event-Driven Architecture
                 </p>
                 <p class="text-[10px] text-gray-500">
-                  N-Tier, Hexagonal & Domain Driven Design
+                  Decoupled communication using Kafka Topics & Fallbacks
                 </p>
               </div>
             </li>
             <li class="flex items-start gap-3">
               <i class="fas fa-check-circle text-secondary mt-1 text-xs"></i>
               <div>
-                <p class="text-xs font-bold text-gray-200">DB Design</p>
+                <p class="text-xs font-bold text-gray-200">
+                  Clean & Hexagonal Architecture
+                </p>
                 <p class="text-[10px] text-gray-500">
-                  Normalization, Indexing & Query Tuning
+                  SOLID, DDD, & Layered Microservices Design
+                </p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fas fa-check-circle text-secondary mt-1 text-xs"></i>
+              <div>
+                <p class="text-xs font-bold text-gray-200">
+                  Resilience Patterns
+                </p>
+                <p class="text-[10px] text-gray-500">
+                  Circuit Breaker, Rate Limiting, & Bulkhead
                 </p>
               </div>
             </li>
